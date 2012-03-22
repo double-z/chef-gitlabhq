@@ -42,7 +42,7 @@ directory '/home/git/repositories' do
 end
 
 # add localhost to known_host to automatically connect
-execute "ssh-keyscan localhost > .ssh/known_hosts" do
+execute "ssh-keyscan `uname -n` > .ssh/known_hosts" do
   user node[:gitlabhq][:user]
   cwd "/home/#{node[:gitlabhq][:user]}"
   not_if "grep localhost .ssh/known_hosts" # FIX! This doesn't work
